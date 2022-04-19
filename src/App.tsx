@@ -2,28 +2,31 @@ import React from 'react';
 import './App.css';
 import {Accordion} from "./components/Accordion/Accordion";
 import {Rating} from "./components/Rating/Rating";
+import {ButtonLight} from "./components/ButtonLight/ButtonLight";
 
 function App() {
     return (
         <>
             <PageTitle title={'This is component'}/>
 
-            <Accordion titleValue={'Menu 1'} collapsed={true}/>
-            <Accordion titleValue={'Menu 2'} collapsed={false}/>
+            <Accordion titleValue={'Menu 1'}/>
+            <Accordion titleValue={'Menu 2'}/>
 
-            <Rating value={0}/>
-            <Rating value={1}/>
-            <Rating value={2}/>
-            <Rating value={3}/>
-            <Rating value={4}/>
-            <Rating value={5}/>
+            <Rating/>
+            <Rating/>
+            <Rating/>
+            <Rating/>
+
+            <ButtonLight/>
+            <ButtonLight/>
+            <ButtonLight/>
         </>
     );
 }
 
-const sum = (a: number, b: number) => {
-    alert(a + b);
-}
+// const sum = (a: number, b: number) => {
+//     alert(a + b);
+// }
 
 type PageTypePropsType = {
     title: string
