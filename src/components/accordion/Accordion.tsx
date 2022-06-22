@@ -1,28 +1,54 @@
-import React from "react";
+import React, {useState} from "react";
+import {accordionDataType} from "../../App";
 
 type AccordionPropsType = {
-    titleValue: string,
+    data: accordionDataType
+}
+type AccordionTitlePropsType = {
+    title: string
+    callback: () => void
+}
+type AccordionBodyPropsType = {
     collapsed: boolean
 }
 
 
-export function Accordion(props: AccordionPropsType) {
+export const Accordion = (props: AccordionPropsType) => {
+
+    let [collapsed, setCollapsed] = useState<boolean>(props.data.collapsed)
+
+    const changeCollapsed = () => {
+        collapsed ? setCollapsed(false) : setCollapsed(true)
+    }
+
     return (
-        <>
-            <h2>{props.titleValue}</h2>
-            {!props.collapsed && <MenuData />}
-        </>
+        <div>
+            <AccordionTitle title={props.data.title} callback={changeCollapsed}/>
+            <AccordionBody collapsed={collapsed}/>
+        </div>
     )
 }
 
-const MenuData = () => {
+const AccordionTitle = (props: AccordionTitlePropsType) => {
+    const onclickHandler = () => {
+        props.callback()
+    }
     return (
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JS</li>
-            <li>TS</li>
-            <li>REACT</li>
-        </ul>
+        <h3 onClick={onclickHandler}>{props.title}</h3>
+    )
+}
+
+const AccordionBody = (props: AccordionBodyPropsType) => {
+    return (
+        <>
+            {props.collapsed ? <></> :
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JS</li>
+                    <li>TS</li>
+                    <li>REACT</li>
+                </ul>}
+        </>
     )
 }

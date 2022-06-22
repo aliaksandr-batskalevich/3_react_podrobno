@@ -1,35 +1,98 @@
-import React from "react";
+import React, {useState} from "react";
+import {ratingDataType, valueType} from "../../App";
 
-type RatingPropsType = {
-    value: 0 | 1 | 2 | 3 | 4 | 5
-}
 type StarPropsType = {
     selected: boolean
+};
+
+type RatingPropsType = {
+    data: ratingDataType
 }
 
-function Star(props: StarPropsType) {
-    if (props.selected === true) {
-        return (
-            <span><b>Star </b></span>
-        )
-    } else {
-        return (
-            <span>Star </span>
-        )
-    }
+type StarsValuePropsType = {
+    value: valueType
 }
 
-export function Rating(props: RatingPropsType) {
+
+export const Rating = (props: RatingPropsType) => {
+
+    let [ratingData, setRatingData] = useState<ratingDataType>(props.data)
+
     return (
-        <div>
-            <Star selected={props.value > 0}/>
-            <Star selected={props.value > 1}/>
-            <Star selected={props.value > 2}/>
-            <Star selected={props.value > 3}/>
-            <Star selected={props.value > 4}/>
-        </div>
+        <>
+            <h3>{ratingData.title}</h3>
+            <Stars value={ratingData.value}/>
+        </>
     )
 }
 
+const Stars = (props: StarsValuePropsType) => {
+    if (props.value === 5) {
+        return (
+            <div className='StarWrapper'>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={true}/>
+            </div>
+        )
+    } else if (props.value === 4) {
+        return (
+            <div className='StarWrapper'>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={false}/>
+            </div>
+        )
+    } else if (props.value === 3) {
+        return (
+            <div className='StarWrapper'>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+            </div>
+        )
+    } else if (props.value === 2) {
+        return (
+            <div className='StarWrapper'>
+                <Star selected={true}/>
+                <Star selected={true}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+            </div>
+        )
+    } else if (props.value === 1) {
+        return (
+            <div className='StarWrapper'>
+                <Star selected={true}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+            </div>
+        )
+    } else {
+        return (
+            <div className='StarWrapper'>
+                <Star selected={false}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+                <Star selected={false}/>
+            </div>
+        )
+    }
 
+}
 
+const Star = (props: StarPropsType) => {
+    return (
+        <>{props.selected ? <span><b>Star</b></span> : <span>Star</span>}</>
+    )
+}

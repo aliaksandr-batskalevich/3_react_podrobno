@@ -1,42 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {Accordion} from "./components/Accordion/Accordion";
+import {Header} from "./components/Header/Header";
 import {Rating} from "./components/Rating/Rating";
-import {ButtonLight} from "./components/ButtonLight/ButtonLight";
+import {Accordion} from "./components/Accordion/Accordion";
+
+export type valueType = 0 | 1 | 2 | 3 | 4 | 5
+
+export type ratingDataType = {
+    id: string
+    title: string
+    value: valueType
+}
+
+export type accordionDataType = {
+    title: string
+    collapsed: boolean
+}
+
+const ratingDataFirst: ratingDataType = {id: '1', title: 'First rating', value: 4}
+
+const accordionDataFirst: accordionDataType = {
+    title: 'Menu',
+    collapsed: false
+}
 
 function App() {
+
     return (
-        <>
-            <PageTitle title={'This is component'}/>
-
-            <Accordion titleValue={'Menu 1'}/>
-            <Accordion titleValue={'Menu 2'}/>
-
-            <Rating/>
-            <Rating/>
-            <Rating/>
-            <Rating/>
-
-            <ButtonLight/>
-            <ButtonLight/>
-            <ButtonLight/>
-        </>
+        <div className="App">
+            <Header/>
+            <Rating data={ratingDataFirst}/>
+            <Accordion data={accordionDataFirst}/>
+        </div>
     );
-}
-
-// const sum = (a: number, b: number) => {
-//     alert(a + b);
-// }
-
-type PageTypePropsType = {
-    title: string
-}
-
-function PageTitle(props: PageTypePropsType) {
-    console.log("Title rendering")
-    return (
-        <h1>{props.title}</h1>
-    )
 }
 
 export default App;
