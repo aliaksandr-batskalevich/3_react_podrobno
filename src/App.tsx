@@ -3,6 +3,7 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Rating} from "./components/Rating/Rating";
 import {Accordion} from "./components/Accordion/Accordion";
+import {Indicator} from "./components/Indicator/Indicator";
 
 export type valueType = 0 | 1 | 2 | 3 | 4 | 5
 
@@ -31,6 +32,7 @@ function App() {
             <Header/>
             <Rating data={ratingDataFirst}/>
             <Accordion data={accordionDataFirst}/>
+            <Indicator/>
         </div>
     );
 }

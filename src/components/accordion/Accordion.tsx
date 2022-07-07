@@ -17,9 +17,7 @@ export const Accordion = (props: AccordionPropsType) => {
 
     let [collapsed, setCollapsed] = useState<boolean>(props.data.collapsed)
 
-    const changeCollapsed = () => {
-        collapsed ? setCollapsed(false) : setCollapsed(true)
-    }
+    const changeCollapsed = () => {setCollapsed(!collapsed)}
 
     return (
         <div>
@@ -41,7 +39,7 @@ const AccordionTitle = (props: AccordionTitlePropsType) => {
 const AccordionBody = (props: AccordionBodyPropsType) => {
     return (
         <>
-            {props.collapsed ? <></> :
+            { !props.collapsed &&
                 <ul>
                     <li>HTML</li>
                     <li>CSS</li>
