@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {ratingDataType, valueType} from "../../App";
+
+export type valueType = 0 | 1 | 2 | 3 | 4 | 5
 
 type StarPropsType = {
     selected: boolean
@@ -9,22 +10,30 @@ type StarsValuePropsType = {
     value: valueType
     ratingCallBack: (newRating: valueType) => void
 }
-type RatingPropsType = {
-    data: ratingDataType
+export type RatingPropsType = {
+    /**
+     * Element, that...
+     * 123
+     */
+    title: string
+    defaultValue?: valueType
+    onChange?: (value: valueType) => void
 }
 
 
-export const Rating = (props: RatingPropsType) => {
+export const Rating: React.FC<RatingPropsType> = ({title, defaultValue, onChange}) => {
 
-    let [ratingData, setRatingData] = useState<ratingDataType>(props.data)
+    let [ratingData, setRatingData] = useState<valueType>(defaultValue ? defaultValue : 0);
     const changeRating = (newRating: valueType) => {
-        ratingData.value === 1 && newRating === 1 ? setRatingData({...ratingData, value: 0}) : setRatingData({...ratingData, value: newRating})
+        let newRatingData = ratingData === 1 && newRating === 1 ? 0 : newRating;
+         setRatingData(newRatingData);
+        onChange && onChange(newRatingData);
     }
 
     return (
         <>
-            <h3>{ratingData.title}</h3>
-            <Stars value={ratingData.value} ratingCallBack={changeRating}/>
+            <h3>{title}</h3>
+            <Stars value={ratingData} ratingCallBack={changeRating}/>
         </>
     )
 }
