@@ -10,6 +10,7 @@ export const Indicator = () => {
 
     return (
         <div className={s.indicatorWrapper}>
+            <h3>Indicator</h3>
             <div className={`${s.button} ${on && s.on}`} onClick={() => on ? onOff(false) : onOff(true)}>On</div>
             <div className={`${s.button} ${!on && s.off}`}  onClick={() => on ? onOff(true) : onOff(false)}>Off</div>
             <div className={`${s.indicator} ${on ? s.on : s.off}`} onClick={() => onOff(true)}/>

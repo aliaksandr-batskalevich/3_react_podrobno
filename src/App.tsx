@@ -4,21 +4,12 @@ import {Header} from "./components/Header/Header";
 import {Rating} from "./components/Rating/Rating";
 import {Accordion} from "./components/Accordion/Accordion";
 import {Indicator} from "./components/Indicator/Indicator";
-
-export type valueType = 0 | 1 | 2 | 3 | 4 | 5
-
-export type ratingDataType = {
-    id: string
-    title: string
-    value: valueType
-}
+import {Counter} from "./components/Counter/Counter";
 
 export type accordionDataType = {
     title: string
     collapsed: boolean
 }
-
-const ratingDataFirst: ratingDataType = {id: '1', title: 'First rating', value: 4}
 
 const accordionDataFirst: accordionDataType = {
     title: 'Menu',
@@ -30,9 +21,15 @@ function App() {
     return (
         <div className="App">
             <Header/>
-            <Rating data={ratingDataFirst}/>
+            <hr/>
+            <Rating title={'First rating'} defaultValue={1}/>
+            <hr/>
             <Accordion data={accordionDataFirst}/>
+            <hr/>
             <Indicator/>
+            <hr/>
+            <Counter />
+            <hr/>
         </div>
     );
 }
