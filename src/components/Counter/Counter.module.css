@@ -1,34 +1,45 @@
 .counterOutWrapper {
-    display: inline-block;
     padding: 10px;
-    background-color: orange;
-    border: black solid 2px;
-    min-width: 200px;
-    margin: 0 auto;
-}
-
-.h3 {
+    background-color: #172031;
     text-align: center;
 }
 
 .counterInWrapper {
+    display: inline-block;
     padding: 10px;
-    background-color: royalblue;
-    border: black solid 1px;
-}
-
-.inputWrapper {
-
-}
-
-.counter {
-    font-size: 30px;
-    font-weight: 600;
     text-align: center;
+    border: #0a97f3 solid 2px;
+    border-radius: 5px;
 }
 
-.buttonsWrapper {
-    margin-top: 15px;
+.displayWrapper {
+    padding: 10px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    min-width: 220px;
+    min-height: 130px;
+    text-align: center;
+    border: #0a97f3 solid 2px;
+    border-radius: 5px;
+}
+
+.display {
+    color: white;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.displayMaxValue {
+    color: red;
+    opacity: 0.5;
+}
+
+.buttonWrapper {
+    margin-top: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border: #0a97f3 solid 2px;
+    border-radius: 5px;
 }

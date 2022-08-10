@@ -1,51 +1,61 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from './Counter.module.css'
 import {ButtonForCounter} from "./ButtonForCounter";
-import {Input} from "./Input";
+
+type rulesType = {
+    resetValue: number
+    maxValue: number
+};
+
+let rules: rulesType = {
+    resetValue: 0,
+    maxValue: 10
+};
 
 export const Counter = () => {
 
-    let [number, setNumber] = useState<number>(0);
-    let [inputData, setInputData] = useState<number>(0);
-    let [disabled, setDisabled] = useState<boolean>(false);
+    let [numOfDisplay, setNumOfDisplay] = useState<number>(rules.resetValue);
 
+    useEffect(() => {
+        let dataFromLocalStorage: string | null = localStorage.getItem("numOfCounter");
+        if (dataFromLocalStorage) {
+            setNumOfDisplay(JSON.parse(dataFromLocalStorage));
+        }
+         }, []);
+    useEffect(() => {localStorage.setItem('numOfCounter', JSON.stringify(numOfDisplay))}, [numOfDisplay]);
 
     const increment = () => {
-        setNumber(++number);
-    }
-    const reset = () => {
-        setNumber(0);
-        setDisabled(false);
-        setInputData(0);
-
-    }
-    const getNumber = (number: number) => {
-        setInputData(number);
-    }
-    const pushNumber = () => {
-        setNumber(inputData);
-        setDisabled(true);
-    }
+        setNumOfDisplay(++numOfDisplay);
+    };
+    const reset = (resetValue: number) => {
+        setNumOfDisplay(resetValue);
+    };
 
 
-    return (
-        <div className={s.counterOutWrapper}>
-            <h3 className={s.h3}>Counter</h3>
-            <div className={s.counterInWrapper}>
-                <Input
-                    disabled={disabled}
-                    inputData={inputData}
-                    callbackInputData={getNumber}
-                    callbackPushNumber={pushNumber}
-                />
-                <div className={s.counter}>
-                    <span>{number}</span>
-                </div>
-                <div className={s.buttonsWrapper}>
-                    <ButtonForCounter title={'+1'} callback={increment} disabled={!disabled}/>
-                    <ButtonForCounter title={'res'} callback={reset} disabled={!disabled}/>
-                </div>
-            </div>
-        </div>
-    )
-}
+    const styleForMaxValue = numOfDisplay >= rules.maxValue ? `${s.display} ${s.displayMaxValue}` : s.display;
+
+
+   return (
+       <div className={s.counterOutWrapper}>
+           <div className={s.counterInWrapper}>
+               <div className={s.displayWrapper}>
+                   <div className={styleForMaxValue}>
+                       {numOfDisplay}
+                   </div>
+               </div>
+               <div className={s.buttonWrapper}>
+                   <ButtonForCounter
+                       title={'INC'}
+                       callBack={increment}
+                       disabled={numOfDisplay >= rules.maxValue}
+                   />
+                   <ButtonForCounter
+                       title={'RESET'}
+                       callBack={() => reset(rules.resetValue)}
+                       disabled={numOfDisplay === rules.resetValue}
+                   />
+               </div>
+           </div>
+       </div>
+   )
+};
