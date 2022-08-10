@@ -24,6 +24,7 @@ export type RatingPropsType = {
 export const Rating: React.FC<RatingPropsType> = ({title, defaultValue, onChange}) => {
 
     let [ratingData, setRatingData] = useState<valueType>(defaultValue ? defaultValue : 0);
+
     const changeRating = (newRating: valueType) => {
         let newRatingData = ratingData === 1 && newRating === 1 ? 0 : newRating;
          setRatingData(newRatingData);

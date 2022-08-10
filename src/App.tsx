@@ -28,8 +28,9 @@ function App() {
             <hr/>
             <Indicator/>
             <hr/>
-            <Counter />
+            {/*<Counter />*/}
             <hr/>
+
         </div>
     );
 }

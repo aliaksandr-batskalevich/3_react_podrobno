@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useReducer, useState} from "react";
 import {accordionDataType} from "../../App";
 
 type AccordionPropsType = {
@@ -11,18 +11,38 @@ type AccordionTitlePropsType = {
 type AccordionBodyPropsType = {
     collapsed: boolean
 }
+type ActionType = ReturnType<typeof changeCollapsedAC>
+export type StateType = {
+    isCollapsed: boolean
+}
+
+
+export const reducer = (state: StateType, action: ActionType): StateType => {
+    switch (action.type) {
+        case "CHANGE_COLLAPSED":
+            return {...state, isCollapsed: !state.isCollapsed};
+        default:
+            return state;
+    }
+};
+
+export const changeCollapsedAC = () => {
+    return {type: 'CHANGE_COLLAPSED'} as const
+};
 
 
 export const Accordion = (props: AccordionPropsType) => {
 
-    let [collapsed, setCollapsed] = useState<boolean>(props.data.collapsed)
+    let [state, stateDispatch] = useReducer(reducer, {isCollapsed: true})
 
-    const changeCollapsed = () => {setCollapsed(!collapsed)}
+    const changeCollapsed = () => {
+        stateDispatch(changeCollapsedAC());
+    }
 
     return (
         <div>
             <AccordionTitle title={props.data.title} callback={changeCollapsed}/>
-            <AccordionBody collapsed={collapsed}/>
+            <AccordionBody collapsed={state.isCollapsed}/>
         </div>
     )
 }
