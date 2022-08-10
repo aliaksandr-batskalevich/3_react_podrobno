@@ -1,21 +1,21 @@
-import s from "./ButtonForCounter.module.css";
 import React from "react";
+import s from './ButtonForCounter.module.css'
 
-type ButtonForCounterPropsType = {
+type ButtonPropsType = {
     title: string
-    callBack: () => void
+    callback: () => void
     disabled: boolean
 }
 
-export const ButtonForCounter = (props: ButtonForCounterPropsType) => {
+export const ButtonForCounter = (props: ButtonPropsType) => {
 
     const onClickButtonHandler = () => {
-        props.callBack();
+        props.callback();
     }
 
     return (
-        <button disabled={props.disabled} className={s.button} onClick={onClickButtonHandler}>{props.title}</button>
+        <>
+            <button className={s.button} disabled={props.disabled} onClick={onClickButtonHandler}>{props.title}</button>
+        </>
     )
 }
-
-
