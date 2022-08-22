@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import s from './Indicator.module.css'
 
-export const Indicator = () => {
+const Indicator = () => {
     let [on, setOn] = useState<boolean>(false);
 
     const onOff = (b: boolean) => {
@@ -16,4 +16,8 @@ export const Indicator = () => {
             <div className={`${s.indicator} ${on ? s.on : s.off}`} onClick={() => onOff(true)}/>
         </div>
     )
-}
+};
+
+const IndicatorWithMemo = React.memo(Indicator);
+
+export default IndicatorWithMemo;

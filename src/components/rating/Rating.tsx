@@ -21,24 +21,6 @@ export type RatingPropsType = {
 }
 
 
-export const Rating: React.FC<RatingPropsType> = ({title, defaultValue, onChange}) => {
-
-    let [ratingData, setRatingData] = useState<valueType>(defaultValue ? defaultValue : 0);
-
-    const changeRating = (newRating: valueType) => {
-        let newRatingData = ratingData === 1 && newRating === 1 ? 0 : newRating;
-         setRatingData(newRatingData);
-        onChange && onChange(newRatingData);
-    }
-
-    return (
-        <>
-            <h3>{title}</h3>
-            <Stars value={ratingData} ratingCallBack={changeRating}/>
-        </>
-    )
-}
-
 const Stars = (props: StarsValuePropsType) => {
 
     const ratingCallBackHandler = (newRating: valueType) => {
@@ -54,7 +36,7 @@ const Stars = (props: StarsValuePropsType) => {
             <Star selected={props.value > 4} ratingCallBack={() => ratingCallBackHandler(5)}/>
         </div>
     )
-}
+};
 
 const Star = (props: StarPropsType) => {
 
@@ -64,4 +46,26 @@ const Star = (props: StarPropsType) => {
     return (
         <span onClick={starOnclickHandler}>{props.selected ? <b>Star</b> : <>Star</>}</span>
     )
-}
+};
+
+const Rating: React.FC<RatingPropsType> = ({title, defaultValue, onChange}) => {
+
+    let [ratingData, setRatingData] = useState<valueType>(defaultValue ? defaultValue : 0);
+
+    const changeRating = (newRating: valueType) => {
+        let newRatingData = ratingData === 1 && newRating === 1 ? 0 : newRating;
+        setRatingData(newRatingData);
+        onChange && onChange(newRatingData);
+    }
+
+    return (
+        <>
+            <h3>{title}</h3>
+            <Stars value={ratingData} ratingCallBack={changeRating}/>
+        </>
+    )
+};
+
+const RatingWithMemo = React.memo(Rating);
+
+export default RatingWithMemo;

@@ -31,22 +31,6 @@ export const changeCollapsedAC = () => {
 };
 
 
-export const Accordion = (props: AccordionPropsType) => {
-
-    let [state, stateDispatch] = useReducer(reducer, {isCollapsed: true})
-
-    const changeCollapsed = () => {
-        stateDispatch(changeCollapsedAC());
-    }
-
-    return (
-        <div>
-            <AccordionTitle title={props.data.title} callback={changeCollapsed}/>
-            <AccordionBody collapsed={state.isCollapsed}/>
-        </div>
-    )
-}
-
 const AccordionTitle = (props: AccordionTitlePropsType) => {
     const onclickHandler = () => {
         props.callback()
@@ -54,7 +38,7 @@ const AccordionTitle = (props: AccordionTitlePropsType) => {
     return (
         <h3 onClick={onclickHandler}>{props.title}</h3>
     )
-}
+};
 
 const AccordionBody = (props: AccordionBodyPropsType) => {
     return (
@@ -69,4 +53,24 @@ const AccordionBody = (props: AccordionBodyPropsType) => {
                 </ul>}
         </>
     )
-}
+};
+
+const Accordion = (props: AccordionPropsType) => {
+
+    let [state, stateDispatch] = useReducer(reducer, {isCollapsed: true})
+
+    const changeCollapsed = () => {
+        stateDispatch(changeCollapsedAC());
+    }
+
+    return (
+        <div>
+            <AccordionTitle title={props.data.title} callback={changeCollapsed}/>
+            <AccordionBody collapsed={state.isCollapsed}/>
+        </div>
+    )
+};
+
+const AccordionWithMemo = React.memo(Accordion);
+
+export default AccordionWithMemo

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Rating, RatingPropsType, valueType} from './Rating';
+import Rating, {RatingPropsType, valueType} from './Rating';
 import {action} from "@storybook/addon-actions";
 import {Story} from "@storybook/react";
 
