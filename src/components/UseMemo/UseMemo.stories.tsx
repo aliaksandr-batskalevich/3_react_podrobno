@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useMemo, useState} from 'react';
+import React, {ChangeEvent, useCallback, useMemo, useState} from 'react';
 
 type CounterPropsType = {
     value: number
@@ -15,7 +15,7 @@ export default {
     title: 'UseMemo'
 }
 
-export const UseMemo = () => {
+const UseMemo = () => {
 
     const [a, setA] = useState<number>(5);
     const [b, setB] = useState<number>(5);
@@ -127,6 +127,49 @@ export const Cities = () => {
             <div>
                 <span>cities before 1 000 000: {citiesWithout1000000}.</span>
             </div>
+        </div>
+    )
+};
+
+
+
+
+
+
+type ExamplePropsType = {
+    books: string
+    addBookCallback: () => void
+}
+
+const SecretExample = (props: ExamplePropsType) => {
+    console.log('SecretComponent')
+    return (
+        <div>
+            <span>{props.books}</span>
+            <button onClick={props.addBookCallback}>addBook</button>
+        </div>
+    )
+}
+
+const ExampleWithMemo = React.memo(SecretExample);
+
+export const UseCallbackExample = () => {
+
+    let [counter, setCounter] = useState<number>(0);
+    let [books, setBooks] = useState<string>('HTML, CSS, JS, TS, REACT')
+
+    const incrementHandler = () => {
+        setCounter(++counter);
+    }
+    const addBookHandler = useCallback(() => {
+        setBooks(books + ', REDUX')
+    }, [books]);
+
+    return (
+        <div>
+            <span>{counter}</span>
+            <button onClick={incrementHandler}>inc</button>
+            <ExampleWithMemo books={books} addBookCallback={addBookHandler}/>
         </div>
     )
 }
