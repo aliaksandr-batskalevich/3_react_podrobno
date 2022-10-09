@@ -332,6 +332,8 @@ class CanvasComponent extends React.Component<CanvasComponentPropsType, any> {
         ctx.stroke();
     }
 
+    // its Ok
+
     render() {
         let canvasWidth = (this.props.clockRadius + this.props.markRadius) * 2;
         let canvasHeight = (this.props.clockRadius + this.props.markRadius) * 2;
