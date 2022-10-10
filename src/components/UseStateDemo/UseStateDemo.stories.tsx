@@ -238,7 +238,7 @@ const AnalogClock: React.FC<AnalogClockPropsType> = ({seconds, minutes, hours}) 
                 markColor={'black'}
                 markRadius={5}
 
-                arrowColor={'black'}
+                arrowColor={'gold'}
 
                 seconds={seconds}
                 minutes={minutes}
@@ -282,11 +282,12 @@ class CanvasComponent extends React.Component<CanvasComponentPropsType, any> {
         // clear canvas
         ctx.clearRect(0, 0, 210, 210);
 
-        // clock background
-        ctx.fillStyle = this.props.clockColor;
+        // clock wrapper
+        ctx.strokeStyle = this.props.clockColor;
         ctx.beginPath();
+        ctx.lineWidth = 2;
         ctx.arc(clockCenterX, clockCenterY, clockRadius, 0, 2 * Math.PI, false);
-        ctx.fill();
+        ctx.stroke();
 
         // mark 12
         ctx.fillStyle = this.props.markColor;
@@ -305,7 +306,7 @@ class CanvasComponent extends React.Component<CanvasComponentPropsType, any> {
 
         ctx.beginPath();
         ctx.lineWidth = 8;
-        ctx.strokeStyle = this.props.clockColor;
+        ctx.strokeStyle = '#010136';
         ctx.arc(clockCenterX, clockCenterY, this.props.clockRadius * 3 / 4, 0, 2 * Math.PI, false);
         ctx.stroke();
 
@@ -327,7 +328,7 @@ class CanvasComponent extends React.Component<CanvasComponentPropsType, any> {
 
         ctx.beginPath();
         ctx.lineWidth = 6;
-        ctx.strokeStyle = this.props.clockColor;
+        ctx.strokeStyle = '#010136';
         ctx.arc(clockCenterX, clockCenterY, this.props.clockRadius, 0, 2 * Math.PI, false);
         ctx.stroke();
     }
